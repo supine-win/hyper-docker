@@ -9,8 +9,8 @@ export TAGS="7.3-alpine-v3.9 7.3-alpine-v3.10 7.3-alpine-v3.11 7.4-alpine-v3.9 7
 
 function pull() {
     for TAG in ${TAGS}; do
-        docker pull docker.pkg.github.com/hyperf/hyperf-docker/hyperf:"${TAG}-${ENGINE}-${VERSION}"
-        docker tag docker.pkg.github.com/hyperf/hyperf-docker/hyperf:"${TAG}-${ENGINE}-${VERSION}" hyperf/hyperf:"${TAG}-${ENGINE}-${VERSION}"
+        docker pull docker.pkg.github.com/supine-win/hyperf-docker/hyperf:"${TAG}-${ENGINE}-${VERSION}"
+        docker tag docker.pkg.github.com/supine-win/hyperf-docker/hyperf:"${TAG}-${ENGINE}-${VERSION}" hyperf/hyperf:"${TAG}-${ENGINE}-${VERSION}"
     done
 }
 
@@ -24,10 +24,10 @@ function push() {
         docker tag hyperf/hyperf:"${TAG}-${ENGINE}-${VERSION}" hyperf/hyperf:"${TAG}-${ENGINE}"
         if [[ ${CHECK} != "--check" ]]; then
             echo "Publishing "${TAG}-${ENGINE}" ..."
-            docker push hyperf/hyperf:"${TAG}-${ENGINE}"
-            docker push hyperf/hyperf:"${TAG}-${ENGINE}-${PV}"
-            docker push hyperf/hyperf:"${TAG}-${ENGINE}-${PPV}"
-            docker push hyperf/hyperf:"${TAG}-${ENGINE}-${VERSION}"
+            docker push supine/hyperf:"${TAG}-${ENGINE}"
+            docker push supine/hyperf:"${TAG}-${ENGINE}-${PV}"
+            docker push supine/hyperf:"${TAG}-${ENGINE}-${PPV}"
+            docker push supine/hyperf:"${TAG}-${ENGINE}-${VERSION}"
             br
         fi
     done

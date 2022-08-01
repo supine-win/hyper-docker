@@ -22,10 +22,14 @@ jobs:
     strategy:
       matrix:
         php-version: [ '7.4', '8.0', '8.1' ]
-        alpine-version: [ '3.13', '3.14', '3.15', '3.16' ]
+        alpine-version: [ '3.12', '3.13', '3.14', '3.15', '3.16' ]
         exclude:
           - php-version: '7.4'
             alpine-version: '3.16'
+          - php-version: '8.0'  # add
+            alpine-version: '3.12'
+          - php-version: '8.1'  # add
+            alpine-version: '3.12'
       max-parallel: 12
       fail-fast: false
     steps:
@@ -48,9 +52,10 @@ jobs:
         run: |
           docker-compose build ${{ steps.fetch-dockerfile.outputs.dockerfile }}
       - name: Push Images to Docker Hub
-        if: ${{ github.event.inputs.event == 'publish' }}
+#        if: ${{ github.event.inputs.event == 'publish' }}
+        if: ${{ github.ref == 'refs/heads/self-docker'}}
         run: |
           docker login --username supine -p $DOCKERHUB_TOKEN
-          docker push hyperf/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
+          docker push supine/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
 
 
