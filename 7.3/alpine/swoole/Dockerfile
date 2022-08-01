@@ -26,8 +26,9 @@ ENV SW_VERSION=${SW_VERSION:-"v4.5.7"} \
 RUN set -ex \
     && apk update \
     # for swoole extension libaio linux-headers
-    && apk add --no-cache libstdc++ openssl git bash \
+    && apk add --no-cache libstdc++ openssl git bash unixodbc-dev \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS libaio-dev openssl-dev curl-dev \
+    && pecl install sqlsrv pdo_sqlsrv \
     # download
     && cd /tmp \
     && curl -SL "https://github.com/swoole/swoole-src/archive/${SW_VERSION}.tar.gz" -o swoole.tar.gz \
@@ -47,6 +48,8 @@ RUN set -ex \
     && echo "memory_limit=1G" > /etc/php7/conf.d/00_default.ini \
     && echo "opcache.enable_cli = 'On'" >> /etc/php7/conf.d/00_opcache.ini \
     && echo "extension=swoole.so" > /etc/php7/conf.d/50_swoole.ini \
+    && echo "extension=sqlsrv.so" >> /etc/php7/conf.d/sqlsrv.ini \
+    && echo "extension=pdo_sqlsrv.so" >> /etc/php7/conf.d/pdo_sqlsrv.ini \
     && echo "swoole.use_shortname = 'Off'" >> /etc/php7/conf.d/50_swoole.ini \
     # install composer
     && wget -nv -O /usr/local/bin/composer https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \

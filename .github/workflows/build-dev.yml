@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: export PHP_BUILD_VERSION=${{ steps.fetch-php-build-version.outputs.version }} && docker-compose build alpine-dev
       - name: Login
-        run: docker login --username limingxinleo -p ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
+        run: docker login --username supine -p ${{ secrets.DOCKERHUB_ACCESSTOKEN }}
       - name: Push
         run: docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${{ matrix.alpine-version }}-dev
 

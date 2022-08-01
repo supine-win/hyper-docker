@@ -50,7 +50,7 @@ jobs:
       - name: Push Images to Docker Hub
         if: ${{ github.event.inputs.event == 'publish' }}
         run: |
-          docker login --username limingxinleo -p $DOCKERHUB_TOKEN
+          docker login --username supine -p $DOCKERHUB_TOKEN
           docker push hyperf/hyperf:${{ matrix.php-version }}-alpine-v${{ matrix.alpine-version }}-base
 
 

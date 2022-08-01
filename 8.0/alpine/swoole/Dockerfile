@@ -18,16 +18,18 @@ ARG COMPOSER_VERSION
 # ---------- env settings ----------
 ##
 ENV SW_VERSION=${SW_VERSION:-"v4.6.7"} \
-    COMPOSER_VERSION=${COMPOSER_VERSION:-"2.0.2"} \
+    COMPOSER_VERSION=${COMPOSER_VERSION:-"2.3.10"} \
     #  install and remove building packages
     PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make php8-dev php8-pear pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake"
 
 # update
 RUN set -ex \
+#    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
     # for swoole extension libaio linux-headers
-    && apk add --no-cache libstdc++ openssl git bash \
+    && apk add --no-cache libstdc++ openssl git bash unixodbc-dev \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS libaio-dev openssl-dev curl-dev \
+    && pecl8 install sqlsrv pdo_sqlsrv \
     # download
     && cd /tmp \
     && curl -SL "https://github.com/swoole/swoole-src/archive/${SW_VERSION}.tar.gz" -o swoole.tar.gz \
@@ -47,6 +49,8 @@ RUN set -ex \
     && echo "memory_limit=1G" > /etc/php8/conf.d/00_default.ini \
     && echo "opcache.enable_cli = 'On'" >> /etc/php8/conf.d/00_opcache.ini \
     && echo "extension=swoole.so" > /etc/php8/conf.d/50_swoole.ini \
+    && echo "extension=sqlsrv.so" >> /etc/php8/conf.d/sqlsrv.ini \
+    && echo "extension=pdo_sqlsrv.so" >> /etc/php8/conf.d/pdo_sqlsrv.ini \
     && echo "swoole.use_shortname = 'Off'" >> /etc/php8/conf.d/50_swoole.ini \
     # install composer
     && wget -nv -O /usr/local/bin/composer https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
@@ -60,4 +64,5 @@ RUN set -ex \
     # ---------- clear works ----------
     && apk del .build-deps \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/local/bin/php* \
-    && echo -e "\033[42;37m Build Completed :).\033[0m\n"
+    && echo -e "\033[42;37m Build Completed :).\033[0m\n" \
+
