@@ -1,13 +1,13 @@
-# hyperf/hyperf:7.4
+# supine/hyperf:7.4
 #
 # @link     https://www.hyperf.io
 # @document https://hyperf.wiki
 # @contact  group@hyperf.io
-# @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+# @license  https://github.com/supine-win/hyperf-docker/blob/master/LICENSE
 
 ARG UBUNTU_VERSION
 
-FROM hyperf/hyperf:7.4-ubuntu-v${UBUNTU_VERSION}-base
+FROM supine/hyperf:7.4-ubuntu-v${UBUNTU_VERSION}-base
 
 LABEL maintainer="Hyperf Developers <group@hyperf.io>" version="1.0" license="MIT"
 

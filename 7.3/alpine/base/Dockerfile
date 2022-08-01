@@ -1,9 +1,9 @@
-# hyperf/hyperf:7.3
+# supine/hyperf:7.3
 #
 # @link     https://www.hyperf.io
 # @document https://hyperf.wiki
 # @contact  group@hyperf.io
-# @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+# @license  https://github.com/supine-win/hyperf-docker/blob/master/LICENSE
 
 ARG ALPINE_VERSION
 

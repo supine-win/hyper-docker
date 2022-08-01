@@ -4,10 +4,10 @@
 docker login --username supine -p $DOCKERHUB_TOKEN
 
 # Push to DockerHub
-docker tag hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%\.*}
-docker tag hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%%\.*}
-docker tag hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}
-docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION}
-docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%\.*}
-docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%%\.*}
-docker push hyperf/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}
+docker tag supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%\.*}
+docker tag supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%%\.*}
+docker tag supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION} supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}
+docker push supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION}
+docker push supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%\.*}
+docker push supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}-${SW_VERSION%%\.*}
+docker push supine/hyperf:${PHP_VERSION}-alpine-v${ALPINE_VERSION}-${ENGINE}
