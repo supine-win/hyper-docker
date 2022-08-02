@@ -22,6 +22,12 @@ ENV SW_VERSION=${SW_VERSION:-"v4.6.7"} \
     #  install and remove building packages
     PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make php8-dev php8-pear pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake"
 
+RUN apk add --no-cache $PHPIZE_DEPS unixodbc-dev \
+    && pecl8 install grpc sqlsrv pdo_sqlsrv \
+    && echo "extension=grpc.so" > /etc/php8/conf.d/grpc.ini \
+    && echo "extension=sqlsrv.so" > /etc/php8/conf.d/sqlsrv.ini \
+    && echo "extension=pdo_sqlsrv.so" > /etc/php8/conf.d/pdo_sqlsrv.ini
+
 # update
 RUN set -ex \
     && apk update \
